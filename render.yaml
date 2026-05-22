@@ -1,0 +1,26 @@
+# Render Blueprint - Payment Ledger
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: payment-ledger
+    runtime: node
+    region: frankfurt # أقرب منطقة للشرق الأوسط
+    plan: free
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: SUPABASE_URL
+        sync: false # يتم إدخالها يدوياً من Dashboard
+      - key: SUPABASE_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true # Render يولد قيمة عشوائية آمنة
+      - key: VITE_APP_ID
+        value: payment-ledger

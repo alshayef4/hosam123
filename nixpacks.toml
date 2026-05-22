@@ -1,0 +1,14 @@
+# Railway uses Nixpacks to detect and build the project
+# This file ensures pnpm is used correctly
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["corepack enable", "pnpm install --frozen-lockfile"]
+
+[phases.build]
+cmds = ["pnpm run build"]
+
+[start]
+cmd = "pnpm run start"

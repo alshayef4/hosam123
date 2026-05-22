@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.env
+.env.*
+.vscode
+.kiro
+*.log
+coverage
+.DS_Store
+tmp
+temp
