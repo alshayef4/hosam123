@@ -7,7 +7,7 @@ import { registerOAuthRoutes } from "./oauth";
 import { registerStorageProxy } from "./storageProxy";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
-import { serveStatic, setupVite } from "./vite";
+import { serveStatic } from "./static";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -46,6 +46,10 @@ async function startServer() {
   );
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
+    // Use a variable to prevent esbuild from statically resolving and bundling
+    // the vite module (which transitively imports devDependencies via vite.config.ts)
+    const viteModule = "./vite";
+    const { setupVite } = await import(viteModule);
     await setupVite(app, server);
   } else {
     serveStatic(app);
