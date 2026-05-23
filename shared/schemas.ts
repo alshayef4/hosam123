@@ -22,8 +22,8 @@ export const customerCreateSchema = z.object({
     .string()
     .min(1, "رقم الجوال مطلوب")
     .refine(
-      (val) => val.replace(/\D/g, "").length >= 10,
-      "رقم الجوال يجب أن يحتوي على 10 أرقام على الأقل"
+      (val) => val.replace(/\D/g, "").length >= 9,
+      "رقم الجوال يجب أن يحتوي على 9 أرقام على الأقل"
     ),
   notes: z.string().max(1000).optional(),
 });
@@ -34,8 +34,8 @@ export const customerUpdateSchema = z.object({
   phoneNumber: z
     .string()
     .refine(
-      (val) => val.replace(/\D/g, "").length >= 10,
-      "رقم الجوال يجب أن يحتوي على 10 أرقام على الأقل"
+      (val) => val.replace(/\D/g, "").length >= 9,
+      "رقم الجوال يجب أن يحتوي على 9 أرقام على الأقل"
     )
     .optional(),
   notes: z.string().max(1000).optional(),
